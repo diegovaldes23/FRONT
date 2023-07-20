@@ -1,110 +1,116 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-
-</script>
-
 <template>
-  <header class="header">
-    <div class="logo-container">
-      <img alt="Usach logo" class="logo" src="@/assets/logo.svg" width="200" height="200" />
+  <div class="login-container">
+    <!-- Formulario de inicio de sesión -->
+    <div v-if="!isLoggedIn" class="login-form">
+      <h1 class="login-title">Iniciar Sesión</h1>
+      <input v-model="username" class="login-input" placeholder="Nombre de usuario" />
+      <input v-model="password" type="password" class="login-input" placeholder="Contraseña" />
+      <select v-model="userRole" class="login-select">
+        <option value="usuario">Usuario</option>
+        <option value="jefe">Jefe</option>
+        <option value="analista">Analista</option>
+      </select>
+      <button @click="redirectToHome" class="login-button">Iniciar Sesión</button>
     </div>
 
-    <div class="content-wrapper">
-      <h1 class="title">Sistema de Tickets</h1>
-      <h2 class="subtitle">Universidad Santiago de Chile</h2>
-
-      <nav>
-        <RouterLink class="nav-link" to="/">Asignar Analista</RouterLink>
-        <RouterLink class="nav-link" to="/CrearTicket">Crear Ticket</RouterLink>
-        
-      </nav>
+    <!-- Redirección a home según el rol -->
+    <div v-else>
+      <router-view />
     </div>
-  </header>
-
-  <RouterView />
+  </div>
 </template>
 
-<style scoped>
-.header {
+<script>
+export default {
+  data() {
+    return {
+      username: "",
+      password: "",
+      isLoggedIn: false,
+      userRole: "usuario", // Valor predeterminado seleccionado en la lista desplegable
+    };
+  },
+  methods: {
+    redirectToHome() {
+      // Redireccionar al home correspondiente según el rol del usuario
+      switch (this.userRole) {
+        case "usuario":
+          this.$router.push("/vistausuario");
+          break;
+        case "jefe":
+          this.$router.push("/vistajefe");
+          break;
+        case "analista":
+          this.$router.push("/vistaanalista");
+          break;
+        default:
+          break;
+      }
+      this.isLoggedIn = true;
+    },
+  },
+};
+</script>
+
+<style>
+/* Estilos del formulario de inicio de sesión */
+.login-container {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 2rem;
-  background-color: #f8f8f8;
+  height: 100vh;
+  background-color: #f9f9f9;
 }
 
-.logo-container {
-  margin-bottom: 2rem;
+.login-form {
+  padding: 20px;
+  width: 400px;
+  background-color: #c9e8e6;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.logo {
-  display: block;
-  width: 100%;
-  max-width: 200px;
-  height: auto;
-}
-
-.content-wrapper {
-  text-align: center;
-}
-
-.title {
+.login-title {
   font-size: 2rem;
-  margin-bottom: 2rem;
-  font-family: "Bebas Neue Pro", Arial, sans-serif;
   font-weight: bold;
-  color: #F17E22;
+  color: #f17e22;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.subtitle {
-  font-size: 1rem;
-  margin-bottom: 2rem;
-  font-family: "Bebas Neue Pro", Arial, sans-serif;
-  font-weight: bold;
-  color: #F17E22;
-}
-
-nav {
-  margin-top: 2rem;
-}
-
-.nav-link {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  font-size: 1.2rem;
-  text-decoration: none;
-  color: #333;
+.login-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: #F7AC70;
+  margin-bottom: 10px;
+}
+
+.login-select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  background-color: #f0f0f0;
+}
+
+.login-button {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #f17e22;
+  background-color: #95d5d3;
+  border: 2px solid #00a9a0;
+  border-radius: 4px;
+  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.nav-link:hover {
-  background-color: #F17E22;
-}
-
-@media (min-width: 1024px) {
-  .header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo-container {
-    margin-bottom: 0;
-  }
-
-  .title {
-    text-align: left;
-    margin-bottom: 0;
-  }
-
-  nav {
-    margin-top: 0;
-  }
-
-  .nav-link {
-    margin-left: 1rem;
-  }
+.login-button:hover {
+  background-color: #00a9a0;
 }
 </style>

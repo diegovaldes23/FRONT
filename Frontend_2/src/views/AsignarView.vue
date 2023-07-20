@@ -1,5 +1,5 @@
 <template>
-    <div class="assignment-page">
+    <div class="Asignar">
       <h1 class="page-title">ASIGNACIÓN DE ANALISTA</h1>
   
       <div class="content-container">
@@ -67,10 +67,23 @@
           <p class="selected-ticket" v-if="selectedTicket">Ticket seleccionado: {{ selectedTicket.descripcion }}</p>
           <p class="selected-analista" v-if="selectedAnalista">Analista seleccionado: {{ selectedAnalista.nombre }}</p>
         </div>
-  
+        
+        <div class="form-group">
+      <label for="Prioridad">Asignar Prioridad:</label>
+      <select id="Prioridad" v-model="prioridad">
+        <option value="">Selecciona un Prioridad</option>
+        <option value="baja">baja</option>
+        <option value="media">media</option>
+        <option value="alta">alta</option>
+        <!-- Agrega más opciones según tus necesidades -->
+      </select>
+    </div>
+
         <button class="assign-button" :disabled="!selectedTicket || !selectedAnalista || assignedTicket" @click="assignAnalyst">
           Asignar
         </button>
+
+        
   
         <p v-if="assignedTicket" class="notification">Se logró asignar correctamente un analista al ticket.</p>
       </div>
@@ -96,6 +109,7 @@
         selectedTicket: null,
         selectedAnalista: null,
         assignedTicket: false,
+        prioridad:'',
       }
     },
     methods: {
@@ -106,14 +120,97 @@
         this.selectedAnalista = analista
       },
       assignAnalyst() {
-        console.log(`Asignando el ticket "${this.selectedTicket.descripcion}" al analista "${this.selectedAnalista.nombre}"`)
-        this.assignedTicket = true
+        if (this.prioridad) {
+        console.log(`Asignando el ticket "${this.selectedTicket.descripcion}" al analista "${this.selectedAnalista.nombre}" con prioridad "${this.prioridad}"`);
+        this.assignedTicket = true;
+      } else {
+        alert('Debes seleccionar una prioridad antes de asignar el ticket.');
+      }
       },
     },
   }
   </script>
   
   <style scoped>
+
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #F17E22;
+    margin-bottom: 0.5rem;
+  }
+
+  select {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  /* Estilos para el botón de asignación de prioridad */
+  .priority-button {
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #F17E22;
+    background-color: #95D5D3;
+    border: 2px solid var(--color-border);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+  }
+
+  .priority-button:hover {
+    background-color: #00A9A0;
+  }
+
+  /* Estilos para la lista de opciones de prioridad */
+  .priority-options {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    background-color: #fff;
+    border: 2px solid #00A9A0;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    width: 140px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    right: 4.5rem; /* Alineación a la derecha con respecto al botón "Asignar Prioridad" */
+  }
+
+  .priority-options li {
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .priority-options li:hover {
+    background-color: #f0f0f0;
+  }
+
+
+  input[type="text"],
+  textprioridad {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  }
+
   .assignment-page {
     display: flex;
     flex-direction: column;
