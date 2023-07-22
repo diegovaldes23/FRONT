@@ -40,6 +40,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center; /* Centrar verticalmente */
+    height: 100vh;
+    width: 700px;
+    margin: 0 auto; /* Centrar horizontalmente */
   }
   
   h1 {

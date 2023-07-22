@@ -1,5 +1,6 @@
 <template>
   <div class="login-container">
+    
     <!-- Formulario de inicio de sesión -->
     <div v-if="!isLoggedIn" class="login-form">
       <h1 class="login-title">Iniciar Sesión</h1>
@@ -10,7 +11,7 @@
         <option value="jefe">Jefe</option>
         <option value="analista">Analista</option>
       </select>
-      <button @click="redirectToHome" class="login-button">Iniciar Sesión</button>
+      <button :disabled="!isLoginFormValid" @click="redirectToHome" class="login-button">Iniciar Sesión</button>
     </div>
 
     <!-- Redirección a home según el rol -->
@@ -29,6 +30,15 @@ export default {
       isLoggedIn: false,
       userRole: "usuario", // Valor predeterminado seleccionado en la lista desplegable
     };
+  },
+  computed: {
+    isLoginFormValid() {
+      return (
+        this.username.trim() !== "" &&
+        this.password.trim() !== "" &&
+        this.userRole !== ""
+      );
+    },
   },
   methods: {
     redirectToHome() {
@@ -59,12 +69,15 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  padding: 300px;
   background-color: #f9f9f9;
 }
 
 .login-form {
   padding: 20px;
-  width: 400px;
+  width: 600px;
+  justify-content: center;
+  align-items: center;
   background-color: #c9e8e6;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

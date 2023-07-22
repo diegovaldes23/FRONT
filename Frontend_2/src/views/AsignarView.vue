@@ -133,6 +133,7 @@
   
   <style scoped>
 
+
 .form-group {
     margin-bottom: 1rem;
     display: flex;
@@ -231,8 +232,8 @@
   }
   
   .content-container {
-    width: 100%;
-    max-width: 1280px;
+    height: 600px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 2rem;
     background-color: #C9E8E6;
@@ -243,15 +244,16 @@
   
   .table-section {
     color:#394650;
+    width:600px;
     font-family: "Bebas Neue Pro", Arial, sans-serif;
     margin-bottom: 2rem;
   }
   
   .section-title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
     margin-bottom: 1rem;
-    color: #F17E22;;
+    color: #F17E22;
   }
   
   .assign-button {

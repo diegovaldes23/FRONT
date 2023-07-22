@@ -132,6 +132,8 @@ function submitForm() {
 }
 .CrearTicket {
   background-color: #F9F9F9;  
+  height: 100vh;
+  width:700px;
   padding: 2rem;
 }
 

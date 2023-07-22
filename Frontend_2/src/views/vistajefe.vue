@@ -30,19 +30,23 @@ import { RouterLink, RouterView } from 'vue-router'
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  height: 100vh;
+  width:700px;
   background-color: #f8f8f8;
 }
 
 .logo-container {
   margin-bottom: 2rem;
+  width:400px;
+  padding:0px;
 }
 
 .logo {
   display: block;
-  width: 100%;
-  max-width: 200px;
+  width: 500px;
+  max-width: 300px;
   height: auto;
+  float: left;
 }
 
 .content-wrapper {
@@ -60,6 +64,7 @@ import { RouterLink, RouterView } from 'vue-router'
 .subtitle {
   font-size: 1rem;
   margin-bottom: 2rem;
+  width:400px;
   font-family: "Bebas Neue Pro", Arial, sans-serif;
   font-weight: bold;
   color: #F17E22;

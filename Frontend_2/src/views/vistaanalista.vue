@@ -58,8 +58,13 @@
   <style scoped>
   .Historial {
     display: flex;
+    justify-content: center;
+    padding: 100px;
+    
+    display: flex;
     flex-direction: column;
     align-items: center;
+    
   }
   
   h1 {
@@ -73,7 +78,9 @@
   }
   
   table {
-    width: 100%;
+    width: 460px;
+    align-items: center;
+    height: 100px;
     border-collapse: collapse;
     background-color: #F0F0F0;
     border: 2px solid #00A9A0;
@@ -106,6 +113,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-right: 0.5rem;
+
   }
   
   button:hover {
